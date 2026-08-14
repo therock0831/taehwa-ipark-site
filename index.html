@@ -279,6 +279,16 @@ footer{background:var(--black);color:rgba(255,255,255,0.7);padding:60px 0 34px;}
 .reveal.visible{opacity:1;transform:none;}
 
 /* ---------- Responsive ---------- */
+/* 태블릿 (768~1024px) */
+@media(max-width:1024px){
+  .container-wide{max-width:100%;}
+  .feature-grid{grid-template-columns:repeat(2,1fr);}
+  .comm-item{grid-template-columns:70px 1fr auto;gap:24px;}
+  .hero h1{font-size:clamp(34px,6vw,56px);}
+  .hero .hero-phone{font-size:clamp(28px,5vw,40px);}
+  .section{padding:90px 0;}
+}
+/* 모바일/태블릿 (<=900px) */
 @media(max-width:900px){
   .nav-links,.nav-phone .phone,.nav-phone .cta-btn{display:none;}
   .hamburger{display:flex;}
@@ -290,11 +300,37 @@ footer{background:var(--black);color:rgba(255,255,255,0.7);padding:60px 0 34px;}
   .comm-item{grid-template-columns:1fr;gap:16px;text-align:left;padding:32px 4px;}
   .comm-no{font-size:13px;}
   .comm-ic{margin-top:4px;}
+  .hero{padding:110px 20px 100px;}
+  .hero .badges{gap:8px;}
+  .hero .badge{padding:8px 16px;font-size:11px;}
+  .hero-cta{flex-direction:column;gap:12px;width:100%;max-width:320px;margin:0 auto 20px;}
+  .hero-cta .btn{width:100%;text-align:center;}
+  .model-frame iframe{height:min(60vh,480px);}
+  .layout-frame{min-height:300px;}
+  .foot-top{flex-direction:column;gap:20px;}
 }
+/* 모바일 (<=520px) */
 @media(max-width:520px){
   .stats-grid{grid-template-columns:1fr;}
   .form-row{grid-template-columns:1fr;}
-  .section{padding:80px 0;}
+  .section{padding:70px 0;}
+  .hero h1{font-size:clamp(28px,8vw,40px);}
+  .hero .sub{font-size:15px;line-height:1.7;}
+  .hero .hero-phone{font-size:clamp(24px,7vw,32px);}
+  .hero .brand-tag{font-size:12px;letter-spacing:.2em;}
+  .section_head h2{font-size:clamp(24px,7vw,32px);}
+  .section_head .sub{font-size:14px;}
+  .feature-card img{height:180px;}
+  .panel-spec{padding:28px 20px;}
+  .layout-card{padding:18px;}
+  .layout-frame{padding:10px;min-height:220px;}
+  .comm{padding:80px 0;}
+  .comm-item{padding:26px 4px;}
+  .cta{padding:70px 16px;}
+  .cta .phone{font-size:clamp(26px,8vw,36px);}
+  .reserve-form .form-field input,.reserve-form .form-field select{padding:12px 14px;font-size:14px;}
+  .foot-legal{font-size:11px;}
+  .foot-bottom{flex-direction:column;gap:8px;text-align:center;}
 }
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto;}
