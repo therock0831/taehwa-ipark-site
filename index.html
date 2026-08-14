@@ -574,15 +574,6 @@ footer{background:var(--black);color:rgba(255,255,255,0.7);padding:60px 0 34px;}
         <label for="r-time">방문 시간</label>
         <select id="r-time" name="time" required>
           <option value="">방문 시간을 선택하세요</option>
-          <option>10:00</option>
-          <option>11:00</option>
-          <option>12:00</option>
-          <option>13:00</option>
-          <option>14:00</option>
-          <option>15:00</option>
-          <option>16:00</option>
-          <option>17:00</option>
-          <option>18:00</option>
         </select>
       </div>
     </div>
@@ -681,6 +672,45 @@ const rDate=document.getElementById('r-date');
 const rTime=document.getElementById('r-time');
 const rConsent=document.getElementById('r-consent');
 const submitBtn=document.getElementById('reserveSubmit');
+
+// 오늘 날짜를 min으로 설정 (과거 날짜 선택 불가)
+function todayStr(){
+  const d=new Date();
+  const y=d.getFullYear();
+  const m=String(d.getMonth()+1).padStart(2,'0');
+  const day=String(d.getDate()).padStart(2,'0');
+  return `${y}-${m}-${day}`;
+}
+rDate.min=todayStr();
+
+// 방문 시간 옵션 (10:00~18:00)
+const TIME_SLOTS=['10:00','11:00','12:00','13:00','14:00','15:00','16:00','17:00','18:00'];
+
+// 날짜 선택 시 시간 옵션 갱신 (오늘이면 현재 시간 이후만, 미래면 전체)
+function updateTimeOptions(){
+  const selectedDate=rDate.value;
+  const now=new Date();
+  const today=todayStr();
+  const isToday=selectedDate===today;
+  const currentHour=now.getHours();
+  const currentMinute=now.getMinutes();
+
+  // 기존 옵션 제거 (첫 placeholder 제외)
+  while(rTime.options.length>1) rTime.remove(1);
+
+  TIME_SLOTS.forEach(slot=>{
+    const hour=parseInt(slot.split(':')[0],10);
+    // 오늘이면 현재 시간 이후만, 미래면 전체
+    if(isToday && (hour<currentHour || (hour===currentHour && 0<currentMinute))) return;
+    const opt=document.createElement('option');
+    opt.value=slot;
+    opt.textContent=slot;
+    rTime.appendChild(opt);
+  });
+  rTime.value='';
+  updateSubmitState();
+}
+rDate.addEventListener('change',updateTimeOptions);
 
 // 전화번호 자동 하이픈 포맷 (010-1234-5678)
 function formatPhone(val){
