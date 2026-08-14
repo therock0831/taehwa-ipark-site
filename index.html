@@ -674,7 +674,7 @@ window.addEventListener('scroll',()=>{
 const reserveForm=document.getElementById('reserveForm');
 const reserveMsg=document.getElementById('reserveMsg');
 if(reserveForm){
-  reserveForm.addEventListener('submit',(e)=>{
+  reserveForm.addEventListener('submit',async(e)=>{
     e.preventDefault();
     const name=document.getElementById('r-name').value.trim();
     const phone=document.getElementById('r-phone').value.trim();
@@ -683,8 +683,28 @@ if(reserveForm){
     const consent=document.getElementById('r-consent').checked;
     if(!name||!phone||!date||!time){reserveMsg.textContent='모든 필수 항목을 입력해 주세요.';return;}
     if(!consent){reserveMsg.textContent='개인정보 수집·이용에 동의해 주세요.';return;}
-    reserveMsg.textContent='방문예약이 접수되었습니다. 담당자가 확인 후 연락드리겠습니다. 감사합니다.';
-    reserveForm.reset();
+    const submitBtn=document.getElementById('reserveSubmit');
+    submitBtn.disabled=true;
+    submitBtn.textContent='전송 중...';
+    reserveMsg.textContent='';
+    try{
+      const resp=await fetch('/api/telegram',{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({name,phone,date,time})
+      });
+      const data=await resp.json();
+      if(data.ok){
+        reserveMsg.textContent='방문예약이 접수되었습니다. 담당자가 확인 후 연락드리겠습니다. 감사합니다.';
+        reserveForm.reset();
+      }else{
+        reserveMsg.textContent='전송에 실패했습니다. 잠시 후 다시 시도해 주세요.';
+      }
+    }catch(err){
+      reserveMsg.textContent='전송에 실패했습니다. 잠시 후 다시 시도해 주세요.';
+    }
+    submitBtn.disabled=false;
+    submitBtn.textContent='방문예약 신청';
   });
 }
 </script>
