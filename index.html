@@ -225,6 +225,8 @@ header.scrolled{box-shadow:0 4px 20px rgba(0,0,0,0.08);}
 .form-consent{margin:6px 0 24px;font-size:13px;color:rgba(255,255,255,0.7);}
 .form-consent input{width:auto;margin-right:8px;accent-color:var(--gold);}
 .reserve-form .btn{width:100%;text-align:center;}
+.reserve-form .btn:disabled{opacity:0.5;cursor:not-allowed;border-color:rgba(255,255,255,0.3);color:rgba(255,255,255,0.5);}
+.reserve-form .btn:disabled:hover{background:transparent;color:rgba(255,255,255,0.5);}
 .form-msg{margin-top:16px;font-size:14px;color:var(--gold);text-align:center;min-height:20px;}
 
 /* ---------- Floating action buttons ---------- */
@@ -560,7 +562,7 @@ footer{background:var(--black);color:rgba(255,255,255,0.7);padding:60px 0 34px;}
       </div>
       <div class="form-field">
         <label for="r-phone">연락처</label>
-        <input type="tel" id="r-phone" name="phone" placeholder="010-0000-0000" required>
+        <input type="tel" id="r-phone" name="phone" placeholder="010-0000-0000" maxlength="13" inputmode="numeric" required>
       </div>
     </div>
     <div class="form-row">
@@ -673,17 +675,52 @@ window.addEventListener('scroll',()=>{
 // Reservation form
 const reserveForm=document.getElementById('reserveForm');
 const reserveMsg=document.getElementById('reserveMsg');
+const rName=document.getElementById('r-name');
+const rPhone=document.getElementById('r-phone');
+const rDate=document.getElementById('r-date');
+const rTime=document.getElementById('r-time');
+const rConsent=document.getElementById('r-consent');
+const submitBtn=document.getElementById('reserveSubmit');
+
+// 전화번호 자동 하이픈 포맷 (010-1234-5678)
+function formatPhone(val){
+  const digits=val.replace(/\D/g,'').slice(0,11); // 숫자만, 최대 11자리
+  if(digits.length<4) return digits;
+  if(digits.length<8) return digits.slice(0,3)+'-'+digits.slice(3);
+  return digits.slice(0,3)+'-'+digits.slice(3,7)+'-'+digits.slice(7);
+}
+rPhone.addEventListener('input',()=>{
+  rPhone.value=formatPhone(rPhone.value);
+  updateSubmitState();
+});
+
+// 버튼 활성화 상태 업데이트
+function updateSubmitState(){
+  const nameOk=rName.value.trim().length>0;
+  const phoneOk=rPhone.value.replace(/\D/g,'').length===11; // 정확히 11자리
+  const dateOk=!!rDate.value;
+  const timeOk=!!rTime.value;
+  const consentOk=rConsent.checked;
+  const allOk=nameOk&&phoneOk&&dateOk&&timeOk&&consentOk;
+  submitBtn.disabled=!allOk;
+  submitBtn.style.opacity=allOk?'1':'0.5';
+  submitBtn.style.cursor=allOk?'pointer':'not-allowed';
+}
+
+// 모든 입력에 상태 업데이트 연결
+[rName,rDate,rTime,rConsent].forEach(el=>el.addEventListener('input',updateSubmitState));
+[rName,rDate,rTime,rConsent].forEach(el=>el.addEventListener('change',updateSubmitState));
+
 if(reserveForm){
   reserveForm.addEventListener('submit',async(e)=>{
     e.preventDefault();
-    const name=document.getElementById('r-name').value.trim();
-    const phone=document.getElementById('r-phone').value.trim();
-    const date=document.getElementById('r-date').value;
-    const time=document.getElementById('r-time').value;
-    const consent=document.getElementById('r-consent').checked;
-    if(!name||!phone||!date||!time){reserveMsg.textContent='모든 필수 항목을 입력해 주세요.';return;}
+    const name=rName.value.trim();
+    const phone=rPhone.value.trim();
+    const date=rDate.value;
+    const time=rTime.value;
+    const consent=rConsent.checked;
+    if(!name||phone.replace(/\D/g,'').length!==11||!date||!time){reserveMsg.textContent='모든 필수 항목을 정확히 입력해 주세요.';return;}
     if(!consent){reserveMsg.textContent='개인정보 수집·이용에 동의해 주세요.';return;}
-    const submitBtn=document.getElementById('reserveSubmit');
     submitBtn.disabled=true;
     submitBtn.textContent='전송 중...';
     reserveMsg.textContent='';
@@ -705,8 +742,10 @@ if(reserveForm){
     }
     submitBtn.disabled=false;
     submitBtn.textContent='방문예약 신청';
+    updateSubmitState();
   });
 }
+updateSubmitState();
 </script>
 </body>
 </html>
