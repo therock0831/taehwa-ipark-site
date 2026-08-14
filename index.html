@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="format-detection" content="telephone=no">
+<title>태화강 센트럴 아이파크</title>
+<meta property="og:title" content="태화강 센트럴 아이파크">
+<meta property="og:description" content="기다리던 태화강에 기대되는 아이파크, 태화강 센트럴 아이파크">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&family=Noto+Sans+KR:wght@300;400;500;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --white:#ffffff;
+  --off-white:#f7f6f3;
+  --black:#1a1a1a;
+  --ink:#222222;
+  --gray:#6b6b6b;
+  --light-gray:#e8e6e1;
+  --gold:#b08d3e;
+  --gold-dark:#8f7130;
+  --red:#c30028;
+  --serif:"Playfair Display","Noto Serif KR",Georgia,serif;
+  --sans:"Noto Sans KR","Pretendard",-apple-system,"Segoe UI",sans-serif;
+  --num:"Manrope","Noto Sans KR",-apple-system,"Segoe UI",sans-serif;
+  --maxw:1280px;
+  --pad:24px;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--sans);color:var(--ink);background:var(--white);line-height:1.7;-webkit-font-smoothing:antialiased;}
+img{max-width:100%;display:block;}
+a{text-decoration:none;color:inherit;}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 var(--pad);}
+.container-wide{max-width:1500px;}
+::selection{background:var(--gold);color:#fff;}
+
+/* ---------- Header ---------- */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(255,255,255,0.95);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--light-gray);
+  transition:box-shadow .3s;
+}
+header.scrolled{box-shadow:0 4px 20px rgba(0,0,0,0.08);}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px;}
+.logo{font-family:var(--serif);font-size:22px;font-weight:500;letter-spacing:.02em;color:var(--black);white-space:nowrap;}
+.logo em{color:var(--gold);font-style:normal;}
+.nav-links{display:flex;gap:30px;list-style:none;}
+.nav-links a{font-size:14px;font-weight:400;letter-spacing:.04em;position:relative;padding:6px 0;color:var(--ink);}
+.nav-links a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:2px;background:var(--gold);transition:width .3s;}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-phone{display:flex;align-items:center;gap:18px;}
+.nav-phone .phone{font-family:var(--num);font-size:18px;color:var(--black);letter-spacing:.03em;}
+.nav-phone .phone b{color:var(--gold);font-weight:600;}
+.cta-btn{border:1px solid var(--gold);color:var(--gold);padding:10px 22px;font-size:13px;letter-spacing:.12em;text-transform:uppercase;transition:all .3s;white-space:nowrap;}
+.cta-btn:hover{background:var(--gold);color:#fff;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:10px;}
+.hamburger span{width:24px;height:2px;background:var(--black);transition:all .3s;}
+.hamburger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open span:nth-child(2){opacity:0;}
+.hamburger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* Mobile menu */
+.mobile-menu{position:fixed;top:76px;right:-100%;width:min(340px,80%);height:calc(100vh - 76px);background:var(--black);z-index:99;transition:right .4s;padding:30px;overflow-y:auto;}
+.mobile-menu.open{right:0;}
+.mobile-menu a{display:block;color:rgba(255,255,255,0.85);padding:14px 0;font-size:16px;border-bottom:1px solid rgba(255,255,255,0.1);}
+.mobile-menu a:hover{color:var(--gold);}
+.mobile-menu .mm-phone{margin-top:20px;color:var(--gold);font-family:var(--num);font-size:20px;}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:98;opacity:0;visibility:hidden;transition:all .3s;}
+.overlay.show{opacity:1;visibility:visible;}
+
+/* ---------- Hero ---------- */
+.hero{
+  position:relative;min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;padding:120px 24px 90px;overflow:hidden;
+  background:linear-gradient(165deg,#0d0d0d 0%,#1c1c1c 45%,#2a2418 100%);
+}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0.45;}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.35) 50%,rgba(0,0,0,0.6) 100%);}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 38%,rgba(176,141,62,0.22),transparent 55%);z-index:1;}
+.hero::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:90px 90px;z-index:1;}
+.hero .inner{position:relative;z-index:2;max-width:920px;}
+.hero .hero-ornament{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:30px;}
+.hero .hero-ornament .line{width:56px;height:1px;background:linear-gradient(90deg,transparent,var(--gold));}
+.hero .hero-ornament .line.r{background:linear-gradient(90deg,var(--gold),transparent);}
+.hero .hero-ornament .diamond{width:8px;height:8px;background:var(--gold);transform:rotate(45deg);}
+.hero .brand-tag{font-family:var(--serif);font-size:15px;letter-spacing:.34em;color:rgba(255,255,255,0.75);margin-bottom:22px;text-transform:uppercase;}
+.hero .kicker{font-size:12px;letter-spacing:.5em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;}
+.hero h1{font-family:var(--serif);font-size:clamp(34px,5.5vw,64px);font-weight:500;line-height:1.15;margin-bottom:22px;text-shadow:0 4px 30px rgba(0,0,0,0.4);}
+.hero h1 em{color:var(--gold);font-style:normal;}
+.hero .sub{font-size:clamp(16px,2vw,20px);font-weight:300;color:rgba(255,255,255,0.88);letter-spacing:.02em;margin-bottom:44px;line-height:1.9;}
+.hero .sub strong{color:#fff;font-weight:500;}
+.hero .badges{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:48px;}
+.hero .badge{border:1px solid rgba(255,255,255,0.28);padding:9px 22px;font-size:12px;letter-spacing:.12em;color:rgba(255,255,255,0.92);border-radius:40px;background:rgba(255,255,255,0.04);backdrop-filter:blur(4px);}
+.hero .badge.hot{border-color:var(--gold);color:var(--gold);background:rgba(176,141,62,0.12);}
+.hero .hero-phone{font-family:var(--num);font-size:clamp(30px,5vw,48px);color:var(--gold);letter-spacing:.03em;margin-bottom:34px;text-shadow:0 2px 20px rgba(176,141,62,0.3);}
+.hero .hero-phone span{font-size:0.38em;font-family:var(--sans);letter-spacing:.24em;color:rgba(255,255,255,0.65);display:block;margin-bottom:8px;text-transform:uppercase;}
+.hero-cta{display:inline-flex;align-items:center;gap:16px;}
+.hero-cta .btn{border:1px solid rgba(255,255,255,0.6);color:#fff;padding:17px 42px;font-size:14px;letter-spacing:.18em;text-transform:uppercase;transition:all .35s;border-radius:2px;background:rgba(255,255,255,0.05);}
+.hero-cta .btn.gold{border-color:var(--gold);color:var(--gold);background:rgba(176,141,62,0.1);}
+.hero-cta .btn:hover{background:#fff;color:#1a1a1a;border-color:#fff;transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,0,0,0.3);}
+.hero-cta .btn.gold:hover{background:var(--gold);border-color:var(--gold);color:#fff;}
+.scroll-ind{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);z-index:2;text-align:center;color:rgba(255,255,255,0.55);font-size:11px;letter-spacing:.34em;text-transform:uppercase;}
+.scroll-ind .line{width:1px;height:44px;background:linear-gradient(to bottom,var(--gold),transparent);margin:10px auto 0;animation:pulse 1.8s ease-in-out infinite;transform-origin:top;}
+@keyframes pulse{0%{transform:scaleY(0);}50%{transform:scaleY(1);}100%{transform:scaleY(0);}}
+
+/* ---------- Section head ---------- */
+.section{padding:110px 0;}
+.section.alt{background:var(--off-white);}
+.section_head{text-align:center;margin-bottom:64px;}
+.section_head .kicker{font-size:12px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.section_head h2{font-family:var(--serif);font-size:clamp(28px,4vw,44px);font-weight:500;color:var(--black);line-height:1.3;}
+.section_head .sub{margin-top:16px;color:var(--gray);font-weight:300;font-size:16px;max-width:640px;margin-left:auto;margin-right:auto;}
+
+/* ---------- Feature grid ---------- */
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;}
+.feature-card{border:1px solid var(--light-gray);padding:0 0 30px;background:var(--white);transition:all .3s;overflow:hidden;}
+.feature-card:hover{transform:translateY(-6px);border-color:var(--gold);box-shadow:0 16px 40px rgba(0,0,0,0.08);}
+.feature-card img{width:100%;height:210px;object-fit:cover;margin-bottom:22px;}
+.feature-card .num{font-family:var(--num);font-size:30px;color:var(--gold);padding:0 30px;margin-bottom:14px;}
+.feature-card h3{font-family:var(--serif);font-size:22px;font-weight:500;color:var(--black);margin-bottom:14px;letter-spacing:.03em;padding:0 30px;}
+.feature-card p{font-size:14px;color:var(--gray);font-weight:300;line-height:1.8;padding:0 30px;}
+
+/* ---------- Stats band ---------- */
+.stats{background:var(--black);color:#fff;padding:34px 0;}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;text-align:center;align-items:center;}
+.stat{display:flex;flex-direction:column;gap:4px;}
+.stat .num{font-family:var(--num);font-size:clamp(24px,3vw,34px);color:var(--gold);line-height:1;}
+.stat .lbl{margin-top:6px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,0.7);}
+
+/* ---------- Tabs / product ---------- */
+.tabs{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:44px;}
+.tab-btn{border:1px solid var(--light-gray);background:transparent;padding:14px 30px;font-size:14px;letter-spacing:.06em;color:var(--ink);cursor:pointer;transition:all .3s;font-family:var(--sans);}
+.tab-btn:hover{border-color:var(--gold);color:var(--gold);}
+.tab-btn.active{background:var(--black);color:#fff;border-color:var(--black);}
+.tab-panel{display:none;}
+.tab-panel.active{display:block;animation:fadeIn .5s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+.panel-card{display:grid;grid-template-columns:1.2fr 1fr;gap:0;border:1px solid var(--light-gray);background:#fff;align-items:stretch;}
+.panel-visual{background:var(--off-white);display:flex;align-items:center;justify-content:center;position:relative;overflow:visible;padding:30px;}
+.panel-visual img.plan{max-width:100%;height:auto;width:auto;object-fit:contain;display:block;margin:auto;box-shadow:0 8px 30px rgba(0,0,0,0.12);}
+/* 세대정보 평면도: 더 크게 */
+#units .panel-visual{height:780px;padding:20px;}
+#units .panel-visual img.plan{height:100%;max-width:100%;width:auto;object-fit:contain;}
+.panel-visual img.overview{width:100%;height:100%;object-fit:cover;display:block;padding:0;box-shadow:none;}
+.overview-hero{position:relative;border:1px solid var(--light-gray);background:#fff;overflow:hidden;}
+.overview-hero img{width:100%;height:auto;display:block;object-fit:cover;}
+.overview-hero .stamp{position:absolute;right:18px;bottom:18px;background:rgba(0,0,0,0.55);color:#fff;font-size:11px;letter-spacing:.15em;padding:5px 12px;}
+.panel-visual .ph{text-align:center;color:var(--gray);}
+.panel-visual .ph .ic{font-family:var(--serif);font-size:56px;color:var(--gold);margin-bottom:12px;}
+.panel-visual .ph p{font-size:14px;letter-spacing:.1em;text-transform:uppercase;}
+.panel-spec{padding:44px 40px;}
+.panel-spec h3{font-family:var(--serif);font-size:26px;font-weight:500;color:var(--black);margin-bottom:24px;}
+.spec-row{display:flex;justify-content:space-between;gap:20px;padding:15px 0;border-bottom:1px solid var(--light-gray);font-size:14px;}
+.spec-row:last-child{border-bottom:none;}
+.spec-row .k{color:var(--gold);min-width:110px;letter-spacing:.05em;}
+.spec-row .v{color:var(--ink);text-align:right;}
+
+/* ---------- Community (premium) ---------- */
+.comm{background:var(--black);color:#fff;position:relative;overflow:hidden;padding:120px 0;}
+.comm::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 85% 15%,rgba(176,141,62,0.16),transparent 55%);}
+.comm::after{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.03) 1px,transparent 1px);background-size:80px 80px;pointer-events:none;}
+.comm .container{position:relative;z-index:2;}
+.comm .section_head .kicker{color:var(--gold);}
+.comm .section_head h2{color:#fff;}
+.comm .section_head .sub{color:rgba(255,255,255,0.6);}
+.comm-intro{max-width:640px;margin:0 auto 70px;text-align:center;}
+.comm-intro p{font-size:18px;font-weight:300;color:rgba(255,255,255,0.85);line-height:2;letter-spacing:.01em;}
+.comm-intro .rule{width:56px;height:1px;background:var(--gold);margin:26px auto 0;}
+.comm-list{max-width:1100px;margin:0 auto;border-top:1px solid rgba(255,255,255,0.12);}
+.comm-item{display:grid;grid-template-columns:90px 1fr auto;gap:36px;align-items:center;padding:44px 8px;border-bottom:1px solid rgba(255,255,255,0.12);transition:background .3s;position:relative;}
+.comm-item:hover{background:rgba(176,141,62,0.05);}
+.comm-item:hover .comm-no{color:var(--gold);}
+.comm-no{font-family:var(--num);font-size:15px;letter-spacing:.2em;color:rgba(255,255,255,0.4);transition:color .3s;font-style:normal;}
+.comm-item h3{font-family:var(--serif);font-size:clamp(22px,3vw,30px);font-weight:500;color:#fff;margin-bottom:10px;letter-spacing:.02em;}
+.comm-item p{font-size:15px;font-weight:300;color:rgba(255,255,255,0.7);line-height:1.9;max-width:560px;}
+.comm-ic{width:64px;height:64px;border:1px solid rgba(176,141,62,0.45);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);flex-shrink:0;}
+.comm-ic svg{width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;}
+.comm-ic:hover{background:var(--gold);color:#fff;border-color:var(--gold);}
+.comm-note{text-align:center;margin-top:56px;color:rgba(255,255,255,0.5);font-size:14px;letter-spacing:.05em;}
+.comm-note b{color:var(--gold);font-weight:500;}
+
+/* ---------- Cyber Model House ---------- */
+.modelhouse{background:var(--off-white);}
+.model-frame{border:1px solid var(--light-gray);background:#fff;padding:16px;}
+.model-frame iframe{width:100%;height:min(78vh,720px);border:none;display:block;background:#111;}
+
+/* ---------- Site / Unit Layout (배치도) ---------- */
+.layout-card{border:1px solid var(--light-gray);background:#fff;padding:30px;}
+.layout-card + .layout-card{margin-top:40px;}
+.layout-card .layout-tit{display:flex;align-items:baseline;gap:14px;margin-bottom:20px;}
+.layout-card .layout-tit .no{font-family:var(--num);color:var(--gold);font-size:16px;letter-spacing:.15em;}
+.layout-card .layout-tit h3{font-family:var(--serif);font-size:26px;font-weight:500;color:var(--black);}
+.layout-frame{background:var(--off-white);border:1px solid var(--light-gray);display:flex;align-items:center;justify-content:center;padding:16px;min-height:420px;}
+.layout-frame img{width:100%;height:auto;object-fit:contain;display:block;box-shadow:0 8px 30px rgba(0,0,0,0.12);}
+.layout-note{margin-top:16px;font-size:13px;color:var(--gray);font-weight:300;line-height:1.8;padding-left:12px;border-left:2px solid var(--gold);}
+
+/* ---------- CTA ---------- */
+.cta{background:linear-gradient(135deg,var(--black),#2a2a2a);color:#fff;text-align:center;padding:100px 24px;}
+.cta .kicker{font-size:12px;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:18px;}
+.cta h2{font-family:var(--serif);font-size:clamp(28px,4vw,46px);font-weight:500;line-height:1.35;margin-bottom:18px;}
+.cta h2 em{color:var(--gold);font-style:normal;}
+.cta .sub{color:rgba(255,255,255,0.7);font-weight:300;margin-bottom:34px;font-size:16px;}
+.cta .phone{font-family:var(--num);font-size:clamp(32px,5vw,48px);color:var(--gold);letter-spacing:.03em;margin-bottom:36px;}
+.cta .btn{border:1px solid var(--gold);color:var(--gold);display:inline-block;padding:16px 40px;font-size:14px;letter-spacing:.15em;text-transform:uppercase;transition:all .3s;cursor:pointer;background:transparent;font-family:var(--sans);}
+.cta .btn:hover{background:var(--gold);color:#fff;}
+
+/* ---------- Reservation form ---------- */
+.reserve-form{max-width:640px;margin:0 auto;text-align:left;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px;}
+.form-field{display:flex;flex-direction:column;gap:8px;}
+.form-field.full{grid-column:1/-1;margin-bottom:18px;}
+.form-field label{font-size:13px;letter-spacing:.08em;color:rgba(255,255,255,0.75);}
+.form-field input,.form-field select,.form-field textarea{
+  background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.25);
+  color:#fff;padding:14px 16px;font-size:15px;font-family:var(--sans);border-radius:2px;
+  transition:border-color .3s,background .3s;width:100%;
+}
+.form-field input:focus,.form-field select:focus,.form-field textarea:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,0.12);}
+.form-field select{appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23b08d3e' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;}
+.form-field select option{color:#222;background:#fff;}
+.form-field textarea{resize:vertical;min-height:80px;}
+.form-consent{margin:6px 0 24px;font-size:13px;color:rgba(255,255,255,0.7);}
+.form-consent input{width:auto;margin-right:8px;accent-color:var(--gold);}
+.reserve-form .btn{width:100%;text-align:center;}
+.form-msg{margin-top:16px;font-size:14px;color:var(--gold);text-align:center;min-height:20px;}
+
+/* ---------- Floating action buttons ---------- */
+.fab{position:fixed;right:24px;bottom:24px;z-index:200;display:flex;flex-direction:column;gap:12px;align-items:flex-end;}
+.fab .fab-call{width:56px;height:56px;border-radius:50%;background:var(--red);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(195,0,40,0.4);transition:transform .25s,box-shadow .25s;text-decoration:none;}
+.fab .fab-call:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(195,0,40,0.5);}
+.fab .fab-call svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+.fab .fab-reserve{display:inline-flex;align-items:center;gap:8px;background:var(--black);color:#fff;border:1px solid rgba(255,255,255,0.2);padding:13px 22px;font-size:14px;letter-spacing:.08em;border-radius:40px;box-shadow:0 8px 24px rgba(0,0,0,0.25);transition:all .25s;text-decoration:none;}
+.fab .fab-reserve:hover{background:var(--gold);border-color:var(--gold);transform:translateY(-3px);}
+.fab .fab-reserve svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;}
+@media(max-width:520px){
+  .fab{right:16px;bottom:16px;}
+  .fab .fab-reserve{padding:12px 18px;font-size:13px;}
+}
+
+/* ---------- Footer ---------- */
+footer{background:var(--black);color:rgba(255,255,255,0.7);padding:60px 0 34px;}
+.foot-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:30px;padding-bottom:34px;border-bottom:1px solid rgba(255,255,255,0.12);}
+.foot-logo{font-family:var(--serif);font-size:20px;color:#fff;}
+.foot-logo em{color:var(--gold);font-style:normal;}
+.foot-nav{display:flex;flex-wrap:wrap;gap:22px;}
+.foot-nav a{font-size:13px;color:rgba(255,255,255,0.7);letter-spacing:.04em;}
+.foot-nav a:hover{color:var(--gold);}
+.foot-legal{padding:26px 0;font-size:12px;line-height:1.9;color:rgba(255,255,255,0.5);}
+.foot-legal .dev{margin-top:6px;}
+.foot-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:20px;border-top:1px solid rgba(255,255,255,0.12);font-size:13px;color:rgba(255,255,255,0.55);}
+.foot-bottom .fp{font-family:var(--num);color:var(--gold);font-size:16px;}
+
+/* ---------- Reveal ---------- */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* ---------- Responsive ---------- */
+@media(max-width:900px){
+  .nav-links,.nav-phone .phone,.nav-phone .cta-btn{display:none;}
+  .hamburger{display:flex;}
+  .feature-grid{grid-template-columns:1fr;}
+  .panel-card{grid-template-columns:1fr;}
+  .panel-visual{min-height:260px;}
+  #units .panel-visual{height:auto;min-height:420px;}
+  .stats-grid{grid-template-columns:repeat(2,1fr);}
+  .comm-item{grid-template-columns:1fr;gap:16px;text-align:left;padding:32px 4px;}
+  .comm-no{font-size:13px;}
+  .comm-ic{margin-top:4px;}
+}
+@media(max-width:520px){
+  .stats-grid{grid-template-columns:1fr;}
+  .form-row{grid-template-columns:1fr;}
+  .section{padding:80px 0;}
+}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto;}
+  .reveal{opacity:1;transform:none;transition:none;}
+  .hero .scroll-ind .line{animation:none;}
+}
+</style>
+</head>
+<body>
+
+<!-- Floating action buttons -->
+<div class="fab">
+  <a href="tel:1533-9113" class="fab-call" aria-label="전화걸기" title="전화걸기">
+    <svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.9.6 2.9.7a2 2 0 0 1 1.7 2z"/></svg>
+  </a>
+  <a href="#reserve" class="fab-reserve">
+    <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    방문예약
+  </a>
+</div>
+
+<header>
+  <div class="container nav">
+    <a href="#top" class="logo"><img src="img/logo.png" alt="태화강 센트럴 아이파크" style="height:34px;width:auto;"></a>
+    <ul class="nav-links">
+      <li><a href="#overview" class="active">사업개요</a></li>
+      <li><a href="#features">상품특징</a></li>
+      <li><a href="#layout">단지배치도</a></li>
+      <li><a href="#units">세대정보</a></li>
+      <li><a href="#community">커뮤니티</a></li>
+    </ul>
+    <div class="nav-phone">
+      <div class="phone">대표번호 <b>1533-9113</b></div>
+      <a href="#reserve" class="cta-btn">방문예약</a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="메뉴"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#overview">사업개요</a>
+  <a href="#features">상품특징</a>
+  <a href="#layout">단지배치도</a>
+  <a href="#units">세대정보</a>
+  <a href="#community">커뮤니티</a>
+  <a href="#reserve">방문예약</a>
+  <div class="mm-phone">1533-9113</div>
+</div>
+<div class="overlay" id="overlay"></div>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg" style="background-image:url('img/mnimg01.jpg');"></div>
+  <div class="inner">
+    <div class="hero-ornament"><span class="line"></span><span class="diamond"></span><span class="line r"></span></div>
+    <div class="brand-tag">Taehwa River · CENTRAL IPARK</div>
+    <h1>유명한 강에는 늘<br>도시의 상징이 선다</h1>
+    <p class="sub">울산을 빛낼 <strong>태화강 센트럴 아이파크</strong></p>
+    <div class="badges">
+      <span class="badge hot">GRAND OPEN</span>
+      <span class="badge">한정세대 선착순 계약</span>
+      <span class="badge">계약금 5% · 중도금 무이자 60%</span>
+    </div>
+    <div class="hero-phone"><span>대표번호</span>1533-9113</div>
+    <div class="hero-cta">
+      <a href="#reserve" class="btn gold">방문예약</a>
+      <a href="#overview" class="btn">분양정보</a>
+    </div>
+  </div>
+  <div class="scroll-ind">Scroll<div class="line"></div></div>
+</section>
+
+<!-- OVERVIEW -->
+<section class="section" id="overview">
+  <div class="container">
+    <div class="section_head reveal">
+      <div class="kicker">Project Overview</div>
+      <h2>사업개요</h2>
+      <p class="sub">울산이 부러워한 태화강이 선택한 단 한 자리</p>
+    </div>
+    <div class="panel-card reveal">
+      <div class="panel-visual">
+        <img class="overview" src="img/overview_01cont01.jpg" srcset="img/overview_01cont01.jpg 2000w" sizes="100vw" alt="태화강 센트럴 아이파크 조감도">
+      </div>
+      <div class="panel-spec">
+        <h3>태화강 센트럴 아이파크</h3>
+        <div class="spec-row"><span class="k">시행사</span><span class="v">한국자산신탁(주)</span></div>
+        <div class="spec-row"><span class="k">시공사</span><span class="v">HDC 현대산업개발</span></div>
+        <div class="spec-row"><span class="k">위치</span><span class="v">울산시 중구 반구동 554-5번지 일원</span></div>
+        <div class="spec-row"><span class="k">교통</span><span class="v">강북로 · 제2명촌교(29년 준공) · 태화강역 · 트램 1호선(29년 개통)</span></div>
+        <div class="spec-row"><span class="k">대표번호</span><span class="v" style="color:var(--gold)">1533-9113</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="container stats-grid">
+    <div class="stat reveal"><div class="num">5%</div><div class="lbl">계약금</div></div>
+    <div class="stat reveal"><div class="num">60%</div><div class="lbl">중도금 무이자</div></div>
+    <div class="stat reveal"><div class="num">1차</div><div class="lbl">중도금 납입 전 전매 가능</div></div>
+    <div class="stat reveal"><div class="num">80m</div><div class="lbl">최대 동간거리</div></div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section alt" id="features">
+  <div class="container">
+    <div class="section_head reveal">
+      <div class="kicker">Premium</div>
+      <h2>상품특징</h2>
+      <p class="sub">특별한 설계와 세심한 디테일로 삶의 자부심을 높이는 아이파크</p>
+    </div>
+    <div class="feature-grid">
+      <div class="feature-card reveal"><img src="img/mnprem01.jpg" srcset="img/mnprem01.jpg 1086w" sizes="(max-width:900px) 100vw, 33vw" alt="더블 리버뷰 프리미엄"><div class="num">VIEW</div><h3>더블 리버뷰 프리미엄</h3><p>유유히 흐르는 태화강과 동천강의 풍경을 한눈에 담으며 삶의 낭만을 누리는 자리 (일부세대)</p></div>
+      <div class="feature-card reveal"><img src="img/mnprem02.jpg" srcset="img/mnprem02.jpg 864w" sizes="(max-width:900px) 100vw, 33vw" alt="태화강변 산책로"><div class="num">RIVER</div><h3>태화강변 산책로</h3><p>걸어서 약 5분 거리에 태화강변 산책로가 위치해 가족과 함께 강변 산책을 즐기는 리버 라이프</p></div>
+      <div class="feature-card reveal"><img src="img/mnprem03.jpg" srcset="img/mnprem03.jpg 1152w" sizes="(max-width:900px) 100vw, 33vw" alt="출퇴근이 편리한 교통망"><div class="num">SPEED</div><h3>출퇴근이 편리한 교통망</h3><p>강북로, 제2명촌교(29년 준공예정), 태화강역, 트램1호선(29년 개통예정) 등 직주근접 쾌속교통망</p></div>
+      <div class="feature-card reveal"><img src="img/mnprem04.jpg" srcset="img/mnprem04.jpg 1480w" sizes="(max-width:900px) 100vw, 33vw" alt="학교가 가까운 학세권"><div class="num">EDU</div><h3>학교가 가까운 학세권</h3><p>단지 바로 앞 내황초, 내황유치원 및 가온중, 무룡중, 울산중, 울산가온고 등 우수한 교육환경</p></div>
+      <div class="feature-card reveal"><img src="img/mnprem05.jpg" srcset="img/mnprem05.jpg 1152w" sizes="(max-width:900px) 100vw, 33vw" alt="모두 갖춘 생활인프라"><div class="num">INFRA</div><h3>모두 갖춘 생활인프라</h3><p>홈플러스, 백화점, 코스트코, CGV, 종합운동장, 중구청 등 생활편의시설을 모두 갖춘 자리</p></div>
+      <div class="feature-card reveal"><img src="img/mnprem06.jpg" srcset="img/mnprem06.jpg 864w" sizes="(max-width:900px) 100vw, 33vw" alt="품격을 더한 대규모 커뮤니티"><div class="num">LIFE</div><h3>품격을 더한 대규모 커뮤니티</h3><p>스케일이 다른 풀코트 실내체육관, GDR 골프연습장, 맘스 라운지, 독서실, 도서관 등 특화 커뮤니티시설</p></div>
+      <div class="feature-card reveal"><img src="img/mnprem07.jpg" srcset="img/mnprem07.jpg 1086w" sizes="(max-width:900px) 100vw, 33vw" alt="공원처럼 쾌적한 아파트"><div class="num">ECO</div><h3>공원처럼 쾌적한 아파트</h3><p>지상에 차 없는 단지설계, 동간 거리 최대 80m, 다채로운 테마조경공간 등 친환경 아파트</p></div>
+      <div class="feature-card reveal"><img src="img/mnprem08.jpg" srcset="img/mnprem08.jpg 864w" sizes="(max-width:900px) 100vw, 33vw" alt="아이파크 브랜드 프리미엄"><div class="num">BRAND</div><h3>아이파크 브랜드 프리미엄</h3><p>특별한 설계와 세심한 디테일로 삶의 자부심을 높이는 아이파크 브랜드</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SITE / UNIT LAYOUT -->
+<section class="section" id="layout">
+  <div class="container container-wide">
+    <div class="section_head reveal">
+      <div class="kicker">Site Plan</div>
+      <h2>단지배치도 · 동호배치도</h2>
+      <p class="sub">삶의 품격과 쉼의 가치를 담은 태화강 센트럴 아이파크</p>
+    </div>
+    <div class="layout-card reveal">
+      <div class="layout-tit"><span class="no">01</span><h3>단지배치도</h3></div>
+      <div class="layout-frame"><img src="img/dan_01cont01.jpg" srcset="img/dan_01cont01.jpg 2000w" sizes="100vw" alt="태화강 센트럴 아이파크 단지배치도"></div>
+      <div class="layout-note">※ 단지배치도는 소비자의 이해를 돕기 위한 것으로 실제와 다를 수 있으며, 향후 개발계획 및 인허가에 따라 변경될 수 있습니다.</div>
+    </div>
+    <div class="layout-card reveal">
+      <div class="layout-tit"><span class="no">02</span><h3>동·호배치도</h3></div>
+      <div class="layout-frame"><img src="img/dan_02cont01.jpg" srcset="img/dan_02cont01.jpg 2000w" sizes="100vw" alt="태화강 센트럴 아이파크 동호배치도"></div>
+      <div class="layout-note">※ 상기 동·호 배치도는 소비자의 이해를 돕기 위한 것으로 인·허가 과정 또는 실제 시공 시 현장여건에 따라 변경될 수 있습니다.</div>
+    </div>
+  </div>
+</section>
+
+<!-- UNITS / TABS -->
+<section class="section" id="units">
+  <div class="container">
+    <div class="section_head reveal">
+      <div class="kicker">Residence</div>
+      <h2>세대정보</h2>
+      <p class="sub">태화강 센트럴 아이파크의 다양한 주거 유형을 만나보세요</p>
+    </div>
+    <div class="tabs reveal">
+      <button class="tab-btn active" data-target="p1">전용 84㎡ A타입</button>
+      <button class="tab-btn" data-target="p2">전용 84㎡ B타입</button>
+    </div>
+
+    <div class="tab-panel active" id="p1">
+      <div class="panel-card reveal">
+        <div class="panel-visual"><img class="plan" src="img/plan_84a.jpg" srcset="img/plan_84a.jpg 1500w" sizes="(max-width:900px) 100vw, 50vw" alt="전용 84㎡ A타입 평면도"></div>
+        <div class="panel-spec">
+          <h3>전용 84㎡ A타입</h3>
+          <div class="spec-row"><span class="k">타입</span><span class="v">3-Bay 판상형</span></div>
+          <div class="spec-row"><span class="k">방 / 욕실</span><span class="v">3룸 · 2욕실</span></div>
+          <div class="spec-row"><span class="k">특장점</span><span class="v">태화강 리버뷰 · 효율적 수납</span></div>
+          <div class="spec-row"><span class="k">상태</span><span class="v" style="color:var(--gold)">한정세대 선착순 계약</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="tab-panel" id="p2">
+      <div class="panel-card reveal">
+        <div class="panel-visual"><img class="plan" src="img/plan_84b.jpg" srcset="img/plan_84b.jpg 2174w" sizes="(max-width:900px) 100vw, 50vw" alt="전용 84㎡ B타입 평면도"></div>
+        <div class="panel-spec">
+          <h3>전용 84㎡ B타입</h3>
+          <div class="spec-row"><span class="k">타입</span><span class="v">3-Bay 판상형</span></div>
+          <div class="spec-row"><span class="k">방 / 욕실</span><span class="v">3룸 · 2욕실</span></div>
+          <div class="spec-row"><span class="k">특장점</span><span class="v">태화강 리버뷰 · 효율적 수납</span></div>
+          <div class="spec-row"><span class="k">상태</span><span class="v" style="color:var(--gold)">한정세대 선착순 계약</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CYBER MODEL HOUSE -->
+<section class="section modelhouse" id="modelhouse">
+  <div class="container">
+    <div class="section_head reveal">
+      <div class="kicker">Cyber Model House</div>
+      <h2>사이버 모델하우스</h2>
+      <p class="sub">태화강 센트럴 아이파크를 360°로 둘러보세요</p>
+    </div>
+    <div class="tabs reveal">
+      <button class="tab-btn active" data-frame="https://sws360.com/2025/cow/thriver_ipark_84a/index.htm?media-index=1">전용 84㎡ A타입</button>
+      <button class="tab-btn" data-frame="https://sws360.com/2025/cow/thriver_ipark_84b/index.htm?media-index=1">전용 84㎡ B타입</button>
+    </div>
+    <div class="model-frame reveal">
+      <iframe id="modelhouse-frame" src="https://sws360.com/2025/cow/thriver_ipark_84a/index.htm?media-index=1" allowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" title="사이버 모델하우스"></iframe>
+    </div>
+  </div>
+</section>
+
+<!-- COMMUNITY -->
+<section class="comm" id="community">
+  <div class="container">
+    <div class="section_head reveal">
+      <div class="kicker">Community</div>
+      <h2>커뮤니티</h2>
+      <p class="sub">삶의 품격을 완성하는 아이파크만의 커뮤니티</p>
+    </div>
+    <div class="comm-intro reveal">
+      <p>스케일이 다른 풀코트 시설부터<br>가족을 위한 특화 커뮤니티까지,<br>일상에 프리미엄을 더하는 공간을 마련했습니다.</p>
+      <div class="rule"></div>
+    </div>
+    <div class="comm-list">
+      <div class="comm-item reveal">
+        <span class="comm-no">01</span>
+        <div class="comm-txt">
+          <h3>풀코트 실내체육관</h3>
+          <p>스케일이 다른 풀코트 실내체육관에서 가족과 함께 건강한 하루를 시작하세요.</p>
+        </div>
+        <span class="comm-ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3"/><line x1="3" y1="12" x2="21" y2="12"/></svg></span>
+      </div>
+      <div class="comm-item reveal">
+        <span class="comm-no">02</span>
+        <div class="comm-txt">
+          <h3>GDR 골프연습장</h3>
+          <p>시간과 날씨에 구애받지 않는 GDR 골프연습장을 단지 안에서 누리세요.</p>
+        </div>
+        <span class="comm-ic"><svg viewBox="0 0 24 24"><path d="M4 19c2 2 4 0 5-1l6-7"/><path d="M15 9c0-1 2-2 3 0l1-1"/><circle cx="5" cy="20" r="2.2"/><circle cx="16" cy="8" r="2.2"/></svg></span>
+      </div>
+      <div class="comm-item reveal">
+        <span class="comm-no">03</span>
+        <div class="comm-txt">
+          <h3>맘스 라운지</h3>
+          <p>아이와 함께 편안히 쉬는 맘스 라운지, 이웃과 소통하는 따뜻한 커뮤니티 공간입니다.</p>
+        </div>
+        <span class="comm-ic"><svg viewBox="0 0 24 24"><path d="M4 11h16"/><path d="M5 11c0 4 2 6 4 6h6c2 0 4-2 4-6"/><path d="M12 11v5"/><path d="M9 5h6"/></svg></span>
+      </div>
+      <div class="comm-item reveal">
+        <span class="comm-no">04</span>
+        <div class="comm-txt">
+          <h3>독서실 · 도서관</h3>
+          <p>조용히 집중할 수 있는 독서실과 풍성한 도서관이 마련되어 있습니다.</p>
+        </div>
+        <span class="comm-ic"><svg viewBox="0 0 24 24"><path d="M4 5v15h16V5"/><path d="M8 9h8"/><path d="M8 13h5"/></svg></span>
+      </div>
+      <div class="comm-item reveal">
+        <span class="comm-no">05</span>
+        <div class="comm-txt">
+          <h3>테마조경공간</h3>
+          <p>공원처럼 쾌적한 테마조경공간이 단지 곳곳에 펼쳐져 여유로운 산책을 즐길 수 있습니다.</p>
+        </div>
+        <span class="comm-ic"><svg viewBox="0 0 24 24"><path d="M12 3c-3 2-4 5-4 8a4 4 0 0 0 8 0c0-3-1-6-4-8z"/><path d="M12 11v10"/></svg></span>
+      </div>
+      <div class="comm-item reveal">
+        <span class="comm-no">06</span>
+        <div class="comm-txt">
+          <h3>아이파크 브랜드 프리미엄</h3>
+          <p>특별한 설계와 세심한 디테일로 삶의 자부심을 높이는 아이파크 브랜드.</p>
+        </div>
+        <span class="comm-ic"><svg viewBox="0 0 24 24"><path d="M12 3l2.6 6 6.4.5-4.9 4.2 1.5 6.3L12 16.9 6.4 20l1.5-6.3L3 9.5l6.4-.5z"/></svg></span>
+      </div>
+    </div>
+    <div class="comm-note reveal"><b>COMMUNITY LIFE</b> · 태화강 센트럴 아이파크의 모든 커뮤니티 시설은 입주민만을 위한 공간입니다.</div>
+  </div>
+</section>
+
+<!-- RESERVATION FORM -->
+<section class="cta" id="reserve">
+  <div class="kicker">Visit Reservation</div>
+  <h2>견본주택 <em>방문예약</em></h2>
+  <p class="sub">태화강 센트럴 아이파크 견본주택 방문을 예약하시면<br>전문 상담원이 편리한 시간에 안내해 드립니다.</p>
+  <div class="phone">1533-9113</div>
+  <form class="reserve-form" id="reserveForm" onsubmit="return false;">
+    <div class="form-row">
+      <div class="form-field">
+        <label for="r-name">성명</label>
+        <input type="text" id="r-name" name="name" placeholder="성명을 입력하세요" required>
+      </div>
+      <div class="form-field">
+        <label for="r-phone">연락처</label>
+        <input type="tel" id="r-phone" name="phone" placeholder="010-0000-0000" required>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-field">
+        <label for="r-date">방문 예정일</label>
+        <input type="date" id="r-date" name="date" required>
+      </div>
+      <div class="form-field">
+        <label for="r-time">방문 시간</label>
+        <select id="r-time" name="time" required>
+          <option value="">방문 시간을 선택하세요</option>
+          <option>10:00</option>
+          <option>11:00</option>
+          <option>12:00</option>
+          <option>13:00</option>
+          <option>14:00</option>
+          <option>15:00</option>
+          <option>16:00</option>
+          <option>17:00</option>
+          <option>18:00</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-consent">
+      <label><input type="checkbox" id="r-consent" required> 개인정보 수집·이용에 동의합니다. (방문예약 안내 목적)</label>
+    </div>
+    <button type="submit" class="btn" id="reserveSubmit">방문예약 신청</button>
+    <p class="form-msg" id="reserveMsg"></p>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="foot-top">
+      <div class="foot-logo"><img src="img/logo_white.png" alt="태화강 센트럴 아이파크" style="height:28px;width:auto;"></div>
+      <nav class="foot-nav">
+        <a href="#overview">사업개요</a>
+        <a href="#features">상품특징</a>
+        <a href="#layout">단지배치도</a>
+        <a href="#units">세대정보</a>
+        <a href="#community">커뮤니티</a>
+      </nav>
+    </div>
+    <div class="foot-legal">
+      ※ 부동산 개발업자 한국자산신탁(주) / 서울 강남구 테헤란로 306(역삼동, 카이트타워) / 등록번호 서울 07001<br>
+      ※ 본 웹사이트의 이미지는 소비자의 이해를 돕기 위한 것으로 실제와 다를 수 있으며, 향후 개발계획 및 인허가에 따라 변경될 수 있습니다.<br>
+      ※ 본 웹사이트에 기재된 개발계획 등은 정부정책 및 관계기관, 사업진행과정, 사업주체의 사정에 따라 변경 또는 취소될 수 있으며, 당 사업과는 무관합니다.<br>
+      ※ 사업지 인근 교통시설과 주변환경 등은 해당기관, 지자체의 사정에 따라 변경 또는 취소될 수 있으며, 이는 당 사업과는 무관합니다.
+      <div class="dev">대표문의 1533-9113 · 현장 : 울산시 중구 반구동 554-5번지 일원 · 시공 : HDC 현대산업개발</div>
+    </div>
+    <div class="foot-bottom">
+      <div>© HDC HYUNDAI DEVELOPMENT COMPANY. ALL RIGHT RESERVED.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Header scroll state
+const header=document.querySelector('header');
+window.addEventListener('scroll',()=>{header.classList.toggle('scrolled',window.scrollY>40);});
+
+// Mobile menu
+const hamburger=document.getElementById('hamburger');
+const mobileMenu=document.getElementById('mobileMenu');
+const overlay=document.getElementById('overlay');
+function toggleMenu(open){
+  hamburger.classList.toggle('open',open);
+  mobileMenu.classList.toggle('open',open);
+  overlay.classList.toggle('show',open);
+  document.body.style.overflow=open?'hidden':'';
+}
+hamburger.addEventListener('click',()=>toggleMenu(!mobileMenu.classList.contains('open')));
+overlay.addEventListener('click',()=>toggleMenu(false));
+mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>toggleMenu(false)));
+
+// Reveal on scroll
+const io=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
+},{threshold:0.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// Tabs
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    // unit tabs (data-target)
+    if(btn.dataset.target){
+      document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+      document.getElementById(btn.dataset.target).classList.add('active');
+    }
+    // model house frame (data-frame)
+    if(btn.dataset.frame){
+      const frame=document.getElementById('modelhouse-frame');
+      if(frame) frame.src=btn.dataset.frame;
+    }
+  });
+});
+
+// Active nav link on scroll
+const sections=document.querySelectorAll('section[id]');
+const navLinks=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-120)cur=s.id;});
+  navLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+cur));
+});
+
+// Reservation form
+const reserveForm=document.getElementById('reserveForm');
+const reserveMsg=document.getElementById('reserveMsg');
+if(reserveForm){
+  reserveForm.addEventListener('submit',(e)=>{
+    e.preventDefault();
+    const name=document.getElementById('r-name').value.trim();
+    const phone=document.getElementById('r-phone').value.trim();
+    const date=document.getElementById('r-date').value;
+    const time=document.getElementById('r-time').value;
+    const consent=document.getElementById('r-consent').checked;
+    if(!name||!phone||!date||!time){reserveMsg.textContent='모든 필수 항목을 입력해 주세요.';return;}
+    if(!consent){reserveMsg.textContent='개인정보 수집·이용에 동의해 주세요.';return;}
+    reserveMsg.textContent='방문예약이 접수되었습니다. 담당자가 확인 후 연락드리겠습니다. 감사합니다.';
+    reserveForm.reset();
+  });
+}
+</script>
+</body>
+</html>

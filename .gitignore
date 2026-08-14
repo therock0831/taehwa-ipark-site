@@ -1,0 +1,13 @@
+# 빈 폴더 제외 (css/js는 사용 안 함)
+css/
+js/
+
+# OS 파일
+Thumbs.db
+.DS_Store
+desktop.ini
+
+# 임시/검증 파일
+verify*.jpg
+chk_*.jpg
+v*.jpg
