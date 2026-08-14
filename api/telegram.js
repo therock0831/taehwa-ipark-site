@@ -19,14 +19,12 @@ export default async function handler(req, res) {
   }
 
   const SITE = '태화강 센트럴 아이파크';
-  const SITE_URL = 'ipark.aptlife.co.kr';
 
-  // HTML parse mode - 한글 안전 + 사이트/전화번호 모두 클릭 가능한 링크
+  // HTML parse mode - 한글 안전 + 전화번호 클릭 가능한 링크
   const message = [
     '📋 <b>방문예약 신청 알림</b>',
     '━━━━━━━━━━━━━━',
     `🏠 <b>${SITE}</b>`,
-    `🌐 <a href="https://${SITE_URL}">${SITE_URL}</a>`,
     '━━━━━━━━━━━━━━',
     `👤 성명: ${name}`,
     `📞 연락처: <a href="tel:${phone}">${phone}</a>`,
